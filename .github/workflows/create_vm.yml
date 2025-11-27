@@ -39,9 +39,9 @@ jobs:
           script: |
             export NEW_MEMBER_FILE="${{ steps.changed.outputs.file }}"
             export PROXMOX_PASSWORD="${{ secrets.PROXMOX_PASSWORD }}"
-            export token_secret ="${{ secrets.TOKEN_SECRET }}"
+            export TOKEN_SECRET ="${{ secrets.TOKEN_SECRET }}"
             export VM_NAME="vm-$(date +%s)"
             export NODE="proxmox-node1" 
             cd ~/kubespray
             git pull
-            ansible-playbook create_vm.yml --extra-vars "name=$VM_NAME token_secret=${TOKEN_SECRET} node=${NODE}"
+            ansible-playbook -i inventory.ini create_vm.yml --extra-vars "name=$VM_NAME token_secret=${TOKEN_SECRET} node=${NODE}"
