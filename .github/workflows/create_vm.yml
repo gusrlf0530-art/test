@@ -39,6 +39,6 @@ jobs:
           script: |
             export NEW_MEMBER_FILE="${{ steps.changed.outputs.file }}"
             export PROXMOX_PASSWORD="${{ secrets.PROXMOX_PASSWORD }}"
-            cd /etc/ansible
+            cd ~/kubespray
             git pull
             ansible-playbook create_vm.yml
