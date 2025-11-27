@@ -33,7 +33,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.ANSIBLE_HOST }}
-          username: ansible
+          username: root
           key: ${{ secrets.ANSIBLE_KEY }}
           port: 22
           script: |
