@@ -10,31 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ GitHub 레포 코드 체크아웃
       - uses: actions/checkout@v3
 
-      - uses: tailscale/github-action@v2
+      # 2️⃣ Tailscale 연결
+      - name: Connect to Tailscale
+        uses: tailscale/github-action@v2
         with:
           authkey: ${{ secrets.TS_AUTHKEY }}
 
-
+      # 3️⃣ 변경된 'new-member' 파일 감지
       - name: Detect new member file
         id: changed
         run: |
           BEFORE="${{ github.event.before }}"
           AFTER="${{ github.sha }}"
-          FILE=$(git diff --name-only "$BEFORE" "$AFTER" | grep new-member || true)
-          BASENAME=$(basename "$FILE")
-          echo "file=$FILE" >> $GITHUB_OUTPUT
-
-      - name: Run Ansible on controller
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.ANSIBLE_HOST }}
-          username: ansible
-          key: ${{ secrets.ANSIBLE_KEY }}
-          script: |
-            export NEW_MEMBER_FILE="${{ steps.changed.outputs.file }}"
-            export PROXMOX_PASSWORD="${{ secrets.PROXMOX_PASSWORD }}"
-            cd /etc/ansible
-            git pull
-            ansible-playbook create_vm.yml
+          FILE=$(git diff --name-
