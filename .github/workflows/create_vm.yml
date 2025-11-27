@@ -42,6 +42,7 @@ jobs:
             export TOKEN_SECRET ="${{ secrets.TOKEN_SECRET }}"
             export VM_NAME="vm-$(date +%s)"
             export NODE="proxmox-node1" 
+            export TEMPLATE_ID=100
             cd ~/kubespray
             git pull
-            ansible-playbook -i inventory.ini create_vm.yml --extra-vars "name=$VM_NAME token_secret=${TOKEN_SECRET} node=${NODE}"
+            ansible-playbook -i inventory.ini create_vm.yml --extra-vars "name=$VM_NAME token_secret=${TOKEN_SECRET} node=${NODE} template_id=$TEMPLATE_ID"
