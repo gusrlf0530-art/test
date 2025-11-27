@@ -12,6 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - uses: tailscale/github-action@v2
+        with:
+          authkey: ${{ secrets.TS_AUTHKEY }}
+
+
       - name: Detect new member file
         id: changed
         run: |
