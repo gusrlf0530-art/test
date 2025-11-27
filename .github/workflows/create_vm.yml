@@ -42,4 +42,4 @@ jobs:
             export token_secret ="${{ secrets.TOKEN_SECRET }}"
             cd ~/kubespray
             git pull
-            ansible-playbook create_vm.yml
+            ansible-playbook create_vm.yml --extra-vars "token_secret=${TOKEN_SECRET}"
