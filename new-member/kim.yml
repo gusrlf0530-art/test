@@ -1,0 +1,8 @@
+name: kim-vm
+cpu: 2
+memory: 2048
+disk: 20G
+template_id: 9000
+node: pve1
+storage: local-lvm
+bridge: vmbr0
